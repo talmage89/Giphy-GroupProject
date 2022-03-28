@@ -47,6 +47,3 @@
   .topnav #go:hover {
     cursor:pointer;
   }
-  #gifscontainer, #savedgifs, #exploregifs{
-    background-color: #e9e9e9;
-  }
