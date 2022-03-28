@@ -13,7 +13,12 @@ async function renderTrending() {
     
     let html = '';
     response.data.forEach(gif => {
-        html += `<img src=${gif.images.fixed_height.url} alt="random gif">`
+        html += `<div class="card" style="width: 15rem;">
+        <img src=${gif.images.fixed_height.url} class="card-img-top" alt="random gif">
+        <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Something</p>
+      </div>`
     });
     container.innerHTML = html;
 }
