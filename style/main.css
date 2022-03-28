@@ -1,0 +1,32 @@
+.title{
+    text-align: center;
+}
+.topnav {
+    overflow: hidden;
+    background-color: #e9e9e9;
+  }
+  .topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  .topnav a.active {
+    background-color: #6AE6BA;
+    color: black;
+  }
+  .topnav input[type=text] {
+    display: flex;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+  }
