@@ -19,6 +19,14 @@ function getRandomGif() {
         }
     );
 }
+function getGifsById(ids) {
+    let percentSeperation = ids.join("%");
+    return fetch(`https://api.giphy.com/v1/gifs?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&ids=${percentSeperation}`).then(
+        function (response) {
+            return response.json();
+        }
+    );
+}
 async function renderGifs(type, key) {
     let response = await getTrending();
     console.log(response);
@@ -29,6 +37,8 @@ async function renderGifs(type, key) {
         case 'random': 
             response = await getRandomGif();
             break;
+        case 'ids': 
+            response = await getGifsById(key);
     }
     let html = "";
     let i = 0;
@@ -38,7 +48,7 @@ async function renderGifs(type, key) {
         html += `<div class="card" style="width: 15rem;">
                         <img src=${gif.images.fixed_width.url} class="card-img-top" alt="${gif.title}">
                         <div class="card-body">
-                            <span><button class="btn btn-primary save" id="">Save</button></span>
+                            <span><button class="btn btn-primary save" id="${gif.id}">Save</button></span>
                         </div>
                 </div>`
         document.getElementById(`gifCol${i}`).innerHTML += html;
@@ -47,6 +57,7 @@ async function renderGifs(type, key) {
     });
 }
 
+let savedGifs = [];
 renderGifs();
 
 document.body.addEventListener('click', e => {
@@ -69,5 +80,8 @@ document.body.addEventListener('click', e => {
                 renderGifs('search', 'random');
                 break;
         }
+    }
+    if (e.target.className === 'save') {
+        savedGifs.push(e.target.id);
     }
 });
