@@ -67,13 +67,22 @@ document.body.addEventListener('click', e => {
     }
     if (e.target.className === 'explore-menu') {
         switch(e.target.id) {
+            case 'happy':
+                renderGifs('search', 'happy');
+                break;
+            case 'sad':
+                renderGifs('search', 'sad');
+                break;
             case 'animals':
                 renderGifs('search', 'animals');
                 break;
             case 'celebrities':
                 renderGifs('search', 'celebritiess');
                 break;
-            case 'movies':
+            case 'disney':
+                renderGifs('search', 'disney');
+                break;
+            case 'marvel':
                 renderGifs('search', 'marvel');
                 break;
             case 'other':
