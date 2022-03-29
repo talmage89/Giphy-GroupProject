@@ -20,7 +20,7 @@ async function renderTrending() {
     response.data.forEach(gif => {
         if (i > 3) {i = 0;}
         html += `<div class="card" style="width: 15rem;">
-                        <img src=${gif.images.fixed_width.url} class="card-img-top" alt="random gif">
+                        <img src=${gif.images.fixed_width.url} class="card-img-top" alt="${gif.title}">
                         <div class="card-body">
                             <span><button class="btn btn-primary">Save</button></span>
                         </div>
@@ -38,7 +38,7 @@ async function renderFromSearch(key) {
     response.data.forEach(gif => {
         if (i > 3) {i = 0;}
         html += `<div class="card" style="width: 15rem;">
-                        <img src=${gif.images.fixed_width.url} class="card-img-top" alt="random gif">
+                        <img src=${gif.images.fixed_width.url} class="card-img-top" alt="${gif.title}">
                         <div class="card-body">
                             <span><button class="btn btn-primary">Save</button></span>
                         </div>
