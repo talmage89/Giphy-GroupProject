@@ -60,3 +60,10 @@
 
       justify-content: center;
   }
+  .card{
+    margin-bottom: 20px;
+    border: 1px solid black;
+  }
+  .title{
+    margin: 50px 0px;
+  }
