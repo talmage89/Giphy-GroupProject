@@ -12,8 +12,24 @@ function getGifBySearch(key) {
         }
     );
 }
-async function renderTrending() {
+function getRandomGif() {
+    return fetch(`https://api.giphy.com/v1/gifs/random?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&tag=&rating=g`).then(
+        function (response) {
+            return response.json();
+        }
+    );
+}
+async function renderGifs(type, key) {
     let response = await getTrending();
+    console.log(response);
+    switch(type){
+        case 'search':
+            response = await getGifBySearch(key);
+            break;
+        case 'random': 
+            response = await getRandomGif();
+            break;
+    }
     let html = "";
     let i = 0;
     for(let j = 0; j < 4; j++){document.getElementById(`gifCol${j}`).innerHTML = '';}
@@ -22,25 +38,7 @@ async function renderTrending() {
         html += `<div class="card" style="width: 15rem;">
                         <img src=${gif.images.fixed_width.url} class="card-img-top" alt="${gif.title}">
                         <div class="card-body">
-                            <span><button class="btn btn-primary">Save</button></span>
-                        </div>
-                </div>`
-        document.getElementById(`gifCol${i}`).innerHTML += html;
-        html = '';
-        i ++;
-    });
-}
-async function renderFromSearch(key) {
-    let response = await getGifBySearch(key);
-    let html = "";
-    let i = 0;
-    for(let j = 0; j < 4; j++){document.getElementById(`gifCol${j}`).innerHTML = '';}
-    response.data.forEach(gif => {
-        if (i > 3) {i = 0;}
-        html += `<div class="card" style="width: 15rem;">
-                        <img src=${gif.images.fixed_width.url} class="card-img-top" alt="${gif.title}">
-                        <div class="card-body">
-                            <span><button class="btn btn-primary">Save</button></span>
+                            <span><button class="btn btn-primary save" id="">Save</button></span>
                         </div>
                 </div>`
         document.getElementById(`gifCol${i}`).innerHTML += html;
@@ -49,13 +47,27 @@ async function renderFromSearch(key) {
     });
 }
 
-
-renderTrending();
-
+renderGifs();
 
 document.body.addEventListener('click', e => {
-    if (e.target.id === 'go') {
+    if (e.target.className === 'gobutton') {
         let searchVal = document.getElementById('searchbar').value;
-        renderFromSearch(searchVal);
+        renderGifs('search', searchVal);
+    }
+    if (e.target.className === 'explore-menu') {
+        switch(e.target.id) {
+            case 'animals':
+                renderGifs('search', 'animals');
+                break;
+            case 'celebrities':
+                renderGifs('search', 'celebritiess');
+                break;
+            case 'movies':
+                renderGifs('search', 'marvel');
+                break;
+            case 'other':
+                renderGifs('search', 'random');
+                break;
+        }
     }
 });
