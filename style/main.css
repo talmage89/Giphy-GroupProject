@@ -46,6 +46,7 @@
   }
   .topnav #go:hover {
     cursor:pointer;
+<<<<<<< HEAD
   }
   .imagecontainer{
       height: 300px;
@@ -59,4 +60,6 @@
       flex-direction: row;
       
       justify-content: center;
+=======
+>>>>>>> parent of fc20628 (trending gifs, searchbar working)
   }

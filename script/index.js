@@ -5,13 +5,7 @@ function getTrending() {
         }
     );
 }
-function getGifBySearch(key) {
-    return fetch(`https://api.giphy.com/v1/gifs/search?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&q=${key}&limit=5&offset=0&rating=g&lang=en`).then(
-        function (response) {
-            return response.json();
-        }
-    );
-}
+
 async function renderTrending() {
     let container = document.getElementById('gifscontainer');
     let response = await getTrending();
@@ -20,6 +14,7 @@ async function renderTrending() {
     let html = '';
     response.data.forEach(gif => {
         html += `<div class="card" style="width: 15rem;">
+<<<<<<< HEAD
                     <img src=${gif.images.fixed_width.url} class="card-img-top" alt="random gif">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -50,10 +45,15 @@ async function renderFromSearch(key) {
 
 renderTrending();
 
+=======
+        <img src=${gif.images.fixed_height.url} class="card-img-top" alt="random gif">
+        <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Something</p>
+      </div>`
+    });
+    container.innerHTML = html;
+}
+>>>>>>> parent of fc20628 (trending gifs, searchbar working)
 
-document.body.addEventListener('click', e => {
-    if (e.target.id === 'go') {
-        let searchVal = document.getElementById('searchbar').value;
-        renderFromSearch(searchVal);
-    }
-});
+renderTrending();
