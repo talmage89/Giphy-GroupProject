@@ -20,9 +20,7 @@ async function renderTrending() {
     let html = '';
     response.data.forEach(gif => {
         html += `<div class="card" style="width: 15rem;">
-                    <div class="imagecontainer">
-                        <img src=${gif.images.fixed_width.url} class="card-img-top" alt="random gif">
-                    </div>
+                    <img src=${gif.images.fixed_width.url} class="card-img-top" alt="random gif">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Something</p>
@@ -39,9 +37,7 @@ async function renderFromSearch(key) {
     let html = '';
     response.data.forEach(gif => {
         html += `<div class="card" style="width: 15rem;">
-                    <div class="imagecontainer">
-                        <img src=${gif.images.fixed_width.url} class="card-img-top" alt="random gif">
-                    </div>
+                    <img src=${gif.images.fixed_width.url} class="card-img-top" alt="random gif">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Something</p>
