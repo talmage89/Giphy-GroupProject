@@ -84,4 +84,8 @@ document.body.addEventListener('click', e => {
     if (e.target.className === 'save') {
         savedGifs.push(e.target.id);
     }
+    if (e.target.id === 'savedPage') {
+        renderGifs('ids', savedGifs);
+        console.log('working')
+    }
 });
