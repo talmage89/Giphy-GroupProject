@@ -62,7 +62,10 @@ document.body.addEventListener('click', e => {
             case 'celebrities':
                 renderGifs('search', 'celebritiess');
                 break;
-            case 'movies':
+            case 'disney':
+                renderGifs('search', 'disney');
+                break;
+            case 'marvel':
                 renderGifs('search', 'marvel');
                 break;
             case 'other':
