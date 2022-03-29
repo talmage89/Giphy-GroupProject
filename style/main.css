@@ -67,3 +67,34 @@
   .title{
     margin: 50px 0px;
   }
+
+  /*Explore */
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    height: 200px;
+    background-color: #f1f1f1;
+  }
+  
+  li a{
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  
+  li a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  li:hover{
+    background-color: #555;
+    color: white;
+  }
+  #explorecontainer{
+    display: flex;
+    flex-shrink: 0;
+  }
