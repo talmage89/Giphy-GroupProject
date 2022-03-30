@@ -111,3 +111,10 @@ document.body.addEventListener('click', e => {
         console.log('working')
     }
 });
+window.addEventListener('resize', () => {
+    console.log('window is being resized...')
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    if (mediaQuery.matches) {
+        alert('Media Query Matched!');
+    }
+})
