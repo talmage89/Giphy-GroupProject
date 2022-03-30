@@ -20,7 +20,9 @@ function getRandomGif() {
     );
 }
 function getGifsById(ids) {
-    let percentSeperation = ids.join("%");
+    console.log(ids);
+    let percentSeperation = ids.join("%2C");
+    console.log(percentSeperation);
     return fetch(`https://api.giphy.com/v1/gifs?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&ids=${percentSeperation}`).then(
         function (response) {
             return response.json();
@@ -29,7 +31,6 @@ function getGifsById(ids) {
 }
 async function renderGifs(type, key) {
     let response = await getTrending();
-    console.log(response);
     switch(type){
         case 'search':
             response = await getGifBySearch(key);
@@ -56,8 +57,16 @@ async function renderGifs(type, key) {
         i ++;
     });
 }
+function containerFunction() {
+    console.log(savedGifs);
+    renderGifs('ids', savedGifs);
+    console.log('working');
+}
 
 let savedGifs = [];
+if (localStorage.getItem('saved')) {
+    savedGifs = JSON.parse(localStorage.getItem('saved'));
+}
 renderGifs();
 
 document.body.addEventListener('click', e => {
@@ -90,8 +99,12 @@ document.body.addEventListener('click', e => {
                 break;
         }
     }
-    if (e.target.className === 'save') {
-        savedGifs.push(e.target.id);
+    if (e.target.className.includes('save')) {
+        if (savedGifs.indexOf(e.target.id) === -1) {
+            savedGifs.push(e.target.id);
+            console.log(savedGifs);
+        }
+        localStorage.setItem('saved', JSON.stringify(savedGifs));
     }
     if (e.target.id === 'savedPage') {
         renderGifs('ids', savedGifs);
