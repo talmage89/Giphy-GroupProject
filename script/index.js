@@ -82,6 +82,9 @@ document.body.addEventListener('click', e => {
             case 'sad':
                 renderGifs('search', 'sad');
                 break;
+            case 'catswithlightsabers':
+                renderGifs('search', 'cats with lightsabers');
+                break;
             case 'animals':
                 renderGifs('search', 'animals');
                 break;
@@ -93,6 +96,12 @@ document.body.addEventListener('click', e => {
                 break;
             case 'marvel':
                 renderGifs('search', 'marvel');
+                break;
+            case 'dc':
+                renderGifs('search', 'dc');
+                break;
+            case 'starwars':
+                renderGifs('search', 'star wars');
                 break;
             case 'other':
                 renderGifs('search', 'random');

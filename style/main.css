@@ -72,9 +72,11 @@ body {
   /*Explore */
   ul {
     font-size: 20px;
+    text-align: center;
     list-style-type: none;
     margin: 0;
     padding: 0;
+    padding-top: 30px;
     width: 200px;
     height: 1860px;
     background-color: #f1f1f1;
@@ -85,11 +87,6 @@ body {
     color: #000;
     padding: 8px 16px;
     text-decoration: none;
-  }
-  
-  li a.active {
-    background-color: #04AA6D;
-    color: white;
   }
   
   li a:hover{
