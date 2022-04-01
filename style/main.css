@@ -89,16 +89,6 @@ body {
       padding: 80px 0px 0px 0px;
       justify-content: center;
   }
-  .gif{
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 3px 3px 10px black;
-    transition:all .5s;
-  }
-  .gif:hover{
-    box-shadow: 3px 3px 10px rgb(85, 85, 85);
-    transform: scale(1.07);
-  }
   .row {
     display: flex;
     justify-content: center;
@@ -146,3 +136,43 @@ body {
   .col {
     width: min-content;
   }
+
+  /* ///SaveButton */
+
+.gif-span {
+  position: relative;
+  display: flex;
+  transition:all .5s;
+}
+.gif-span:hover{
+  transform:scale(1.04);
+  color: rgb(238, 238, 238);
+}
+.gif-span:hover .heart-filled{
+  color: rgba(255, 0, 0, 0);
+}
+.heart-filled{
+  color: rgba(255, 0, 0, 0);
+  position: absolute;
+  transition:all .5s;
+  font-size: 72px;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.heart{
+  position: absolute;
+  visibility: hidden;
+}
+.gif{
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px black;
+  transition:all .5s;
+}
+/* .gif:hover{
+  box-shadow: 3px 3px 10px rgb(85, 85, 85);
+  transform: scale(1.07);
+  color:rgb(255, 57, 57)
+} */
