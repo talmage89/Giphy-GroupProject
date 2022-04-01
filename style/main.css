@@ -1,5 +1,5 @@
 body {
-  background-color: #2b2b2b;
+  background-image:url('../pattern-34.jpeg');
   width: 100%;
 }
 .title{
@@ -13,8 +13,8 @@ body {
 }
 .topnav {
     overflow: hidden;
-    background-color: #1a1a1a;
-
+    background-color: #1a1a1aa2;
+    padding-left: 90px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -87,7 +87,6 @@ body {
       margin: 0px;
       padding: 80px 0px 0px 0px;
       justify-content: center;
-      align-items: center;
   }
   .gif{
     margin-bottom: 20px;
