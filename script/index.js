@@ -1,5 +1,5 @@
 function getTrending() {
-    return fetch('https://api.giphy.com/v1/gifs/trending?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&limit=20&rating=pg').then(
+    return fetch('https://api.giphy.com/v1/gifs/trending?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&limit=30&rating=pg').then(
         function (response) {
             return response.json();
         }
@@ -20,9 +20,7 @@ function getRandomGif() {
     );
 }
 function getGifsById(ids) {
-    console.log(ids);
     let percentSeperation = ids.join("%2C");
-    console.log(percentSeperation);
     return fetch(`https://api.giphy.com/v1/gifs?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&ids=${percentSeperation}`).then(
         function (response) {
             return response.json();
@@ -44,6 +42,8 @@ async function renderGifs(type, key) {
             break;
         case 'ids': 
             response = await getGifsById(key);
+            console.log(response);
+            break;
     }
     let html = "";
     let i = 0;
@@ -52,21 +52,21 @@ async function renderGifs(type, key) {
     }
     response.data.forEach(gif => {
         if (i > 3) {i = 0;}
-        html = `<img src=${gif.images.fixed_width.url} class="gif" alt="${gif.title}">`
+        html = 
+        `
+            <span class="gif-span">
+                    <i class="fa-regular fa-heart heart"></i>
+                    <i class="fa-solid fa-heart heart-filled"></i>
+                    <img src=${gif.images.fixed_width.url} class="gif" alt="${gif.title}">
+            </span>
+
+        `
         document.getElementById(`gifCol${i}`).innerHTML += html;
         i ++;
-
-        // <div class="card" style="width: 15rem;">
-        //                 <div class="card-body">
-        //                     <span><button class="btn btn-primary save" id="${gif.id}">Save</button></span>
-        //                 </div>
-        //         </div>
     });
 }
-function containerFunction() {
-    console.log(savedGifs);
+function renderGifsById() {
     renderGifs('ids', savedGifs);
-    console.log('working');
 }
 
 let savedGifs = [];
