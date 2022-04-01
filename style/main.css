@@ -1,5 +1,6 @@
 body {
-  background-color: #706f6f;
+  background-color: #2b2b2b;
+  width: 100%;
 }
 .title{
   font-size: 30px;
@@ -12,45 +13,68 @@ body {
 }
 .topnav {
     overflow: hidden;
-    background-color: #e9e9e9;
-    padding: 20px;
-    border: 2px solid black;
+    background-color: #1a1a1a;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    position: sticky;
+    top: 0px;
+    z-index: 3;
+}
+.topnav-links{
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.topnav-searchbar{
+  display: flex;
+  align-items: center;
+}
+.logo{
+  width: 200px;
+  color: black;
 }
   .topnav a {
-    color: black;
+    color: rgb(143, 143, 143);
+    background-color: none;
+    height: 100%;
     padding: 14px;
     text-decoration: none;
     font-size: 17px;
+    display: flex;
+    align-items: center;
+    transition: all .5s;
   }
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-    height: auto;
-    border: 2px solid black;
+  .topnav a:hover, .topnav a.active:hover{
+    color: rgb(255, 255, 255);
   }
   .topnav a.active {
-    background-color: #B80C00;
-    color: white;
-    height: auto;
+
+    color: rgb(226, 226, 226);
   }
   .topnav input[type=search] {
-    float: right;
+
     border: none;
+    border-radius: 25px;
     margin-right: 16px;
     font-size: 17px;
+    width: 400px;
+    padding: 5px 20px;
   }
-  .topnav input[type=search] :focus {
-    border: 2px solid black;
+  .topnav input[type=search]:focus {
+    outline: none;
   }
   .topnav .gobutton{
     background-color: #B80C00;
     color: white;
-    float: right;
     border: none;
     margin-right: 16px;
     font-size: 17px;
     width: 60px;
-    border-radius: 5px;
+    border-radius: 20px;
+    padding: 5px 10px;
   }
   .topnav #go:hover {
     cursor:pointer;
@@ -60,13 +84,24 @@ body {
       width: 100%;
       display: flex;
       flex-direction: row;
-      padding-top: 50px;
-      background-color: white;
+      margin: 0px;
+      padding: 80px 0px 0px 0px;
       justify-content: center;
+      align-items: center;
   }
-  .card{
+  .gif{
     margin-bottom: 20px;
-    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px black;
+    transition:all .5s;
+  }
+  .gif:hover{
+    box-shadow: 3px 3px 10px rgb(85, 85, 85);
+    transform: scale(1.07);
+  }
+  .row {
+    display: flex;
+    justify-content: center;
   }
 
   /*Explore */
@@ -101,4 +136,7 @@ body {
     margin: 15px auto;
     background-color: white;
     width: 90%;
+  }
+  .col {
+    width: min-content;
   }
