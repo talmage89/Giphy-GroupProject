@@ -1,19 +1,19 @@
 function getTrending() {
-    return fetch('https://api.giphy.com/v1/gifs/trending?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&limit=20&rating=g').then(
+    return fetch('https://api.giphy.com/v1/gifs/trending?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&limit=20&rating=pg').then(
         function (response) {
             return response.json();
         }
     );
 }
 function getGifBySearch(key) {
-    return fetch(`https://api.giphy.com/v1/gifs/search?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&q=${key}&limit=20&offset=0&rating=g&lang=en`).then(
+    return fetch(`https://api.giphy.com/v1/gifs/search?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&q=${key}&limit=20&offset=0&rating=pg&lang=en`).then(
         function (response) {
             return response.json();
         }
     );
 }
 function getRandomGif() {
-    return fetch(`https://api.giphy.com/v1/gifs/random?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&tag=&rating=g`).then(
+    return fetch(`https://api.giphy.com/v1/gifs/random?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&tag=&rating=pg`).then(
         function (response) {
             return response.json();
         }
@@ -36,25 +36,31 @@ async function renderGifs(type, key) {
             response = await getGifBySearch(key);
             break;
         case 'random': 
-            response = await getRandomGif();
+            response.data = [];
+            for (let i = 0; i < 30; i ++) {
+                let gif = await getRandomGif();
+                response.data.push(gif.data);
+            }
             break;
         case 'ids': 
             response = await getGifsById(key);
     }
     let html = "";
     let i = 0;
-    for(let j = 0; j < 4; j++){document.getElementById(`gifCol${j}`).innerHTML = '';}
+    for(let j = 0; j < 4; j++){
+        document.getElementById(`gifCol${j}`).innerHTML = '';
+    }
     response.data.forEach(gif => {
         if (i > 3) {i = 0;}
-        html += `<div class="card" style="width: 15rem;">
-                        <img src=${gif.images.fixed_width.url} class="card-img-top" alt="${gif.title}">
-                        <div class="card-body">
-                            <span><button class="btn btn-primary save" id="${gif.id}">Save</button></span>
-                        </div>
-                </div>`
+        html = `<img src=${gif.images.fixed_width.url} class="gif" alt="${gif.title}">`
         document.getElementById(`gifCol${i}`).innerHTML += html;
-        html = '';
         i ++;
+
+        // <div class="card" style="width: 15rem;">
+        //                 <div class="card-body">
+        //                     <span><button class="btn btn-primary save" id="${gif.id}">Save</button></span>
+        //                 </div>
+        //         </div>
     });
 }
 function containerFunction() {
@@ -64,9 +70,8 @@ function containerFunction() {
 }
 
 let savedGifs = [];
-if (localStorage.getItem('saved')) {
-    savedGifs = JSON.parse(localStorage.getItem('saved'));
-}
+let numCols = 4;
+if (localStorage.getItem('saved')) {savedGifs = JSON.parse(localStorage.getItem('saved'));}
 renderGifs();
 
 document.body.addEventListener('click', e => {
@@ -104,7 +109,7 @@ document.body.addEventListener('click', e => {
                 renderGifs('search', 'star wars');
                 break;
             case 'other':
-                renderGifs('search', 'random');
+                renderGifs('random');
                 break;
         }
     }
@@ -122,8 +127,11 @@ document.body.addEventListener('click', e => {
 });
 window.addEventListener('resize', () => {
     console.log('window is being resized...')
-    const mediaQuery = window.matchMedia('(min-width: 768px)');
-    if (mediaQuery.matches) {
-        alert('Media Query Matched!');
+    if (window.matchMedia('(min-width: 1200px)').matches) {
+        colNums = 4;
+        console.log('window is greater than 1200 px')
+    } else if (window.matchMedia('(min-width: 900px)').matches) {
+        colNums = 3;
+        console.log('window is between 900px - 1200px');
     }
 })
