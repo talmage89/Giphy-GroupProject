@@ -180,8 +180,12 @@ body {
   box-shadow: 3px 3px 10px black;
   transition:all .5s;
 }
-/* .gif:hover{
-  box-shadow: 3px 3px 10px rgb(85, 85, 85);
-  transform: scale(1.07);
-  color:rgb(255, 57, 57)
-} */
+.footer {
+  color: red;
+  background-color: white;
+  font-family: "Ubuntu Condensed", sans-serif;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  margin-top: 100px;
+}
