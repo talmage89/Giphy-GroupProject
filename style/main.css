@@ -143,36 +143,42 @@ body {
   position: relative;
   display: flex;
   transition:all .5s;
+
 }
 .gif-span:hover{
   transform:scale(1.04);
+}
+.gif-overlay:hover .heart-filled{
+  opacity: 1;
   color: rgb(238, 238, 238);
 }
-.gif-span:hover .heart-filled{
-  color: rgba(255, 0, 0, 0);
+.gif-span:hover .gif-overlay{
+  background-color: #1a1a1aa2;
 }
 .heart-filled{
-  color: rgba(255, 0, 0, 0);
+  opacity: 0;
+  color:rgba(238, 238, 238, 0);
   position: absolute;
   transition:all .5s;
   font-size: 72px;
-  z-index: 2;
+  z-index: 6;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-.heart{
-  position: absolute;
-  visibility: hidden;
+
+  width: 72px;
+  height: 72px;
 }
 .gif{
+  z-index: 0;
   margin-bottom: 20px;
   border-radius: 5px;
   box-shadow: 3px 3px 10px black;
   transition:all .5s;
 }
-/* .gif:hover{
-  box-shadow: 3px 3px 10px rgb(85, 85, 85);
-  transform: scale(1.07);
-  color:rgb(255, 57, 57)
-} */
+.gif-overlay {
+  position: absolute;
+  border-radius: 5px;
+  background-color: rgba(255, 0, 0, 0);
+  transition: all .5s;
+}

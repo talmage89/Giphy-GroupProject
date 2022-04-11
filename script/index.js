@@ -42,28 +42,35 @@ async function renderGifs(type, key) {
             break;
         case 'ids': 
             response = await getGifsById(key);
-            console.log(response);
             break;
     }
     let html = "";
     let i = 0;
-    for(let j = 0; j < 4; j++){
-        document.getElementById(`gifCol${j}`).innerHTML = '';
-    }
+    for(let j = 0; j < 4; j++){document.getElementById(`gifCol${j}`).innerHTML = '';}
     response.data.forEach(gif => {
         if (i > 3) {i = 0;}
         html = 
         `
             <span class="gif-span">
-                    <i class="fa-regular fa-heart heart"></i>
-                    <i class="fa-solid fa-heart heart-filled"></i>
-                    <img src=${gif.images.fixed_width.url} class="gif" alt="${gif.title}">
-            </span>
-
-        `
+            <img src=${gif.images.fixed_width.url} class="gif" alt="${gif.title}">
+            `;
+            if (savedGifs.indexOf(gif.id) != -1) {
+                html += `
+                        <span class="gif-overlay" style="height: ${gif.images.fixed_width.height}px; width: 200px;"></span>
+                        <i class="fa-solid fa-heart heart-filled save" id="${gif.id}" style="color: rgb(255,0,0);"></i>
+                        `;
+            } else {
+                html += `
+                        <span class="gif-overlay" style="height: ${gif.images.fixed_width.height}px; width: 200px;"></span>
+                        <i class="fa-solid fa-heart heart-filled save" id="${gif.id}"></i>
+                        `;
+            }
+            html += `</span>`
         document.getElementById(`gifCol${i}`).innerHTML += html;
         i ++;
     });
+    console.log(savedGifs);
+    console.log(response);
 }
 function renderGifsById() {
     renderGifs('ids', savedGifs);
@@ -115,8 +122,12 @@ document.body.addEventListener('click', e => {
     }
     if (e.target.className.includes('save')) {
         if (savedGifs.indexOf(e.target.id) === -1) {
+            document.getElementById(e.target.id).style.color = "rgb(255, 0, 0)";
             savedGifs.push(e.target.id);
             console.log(savedGifs);
+        } else {
+            document.getElementById(e.target.id).style.color = "rgb(238, 238, 238)";
+            savedGifs.splice(savedGifs.indexOf(e.target.id), 1);
         }
         localStorage.setItem('saved', JSON.stringify(savedGifs));
     }
