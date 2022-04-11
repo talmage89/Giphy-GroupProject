@@ -146,3 +146,11 @@ window.addEventListener('resize', () => {
         console.log('window is between 900px - 1200px');
     }
 })
+
+var enter = document.getElementById("searchbar");
+enter.addEventListener("keyup", function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        document.getElementById("myBtn").click();
+    }
+});

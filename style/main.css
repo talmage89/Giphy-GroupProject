@@ -10,6 +10,7 @@ body {
   color: white;
   width: 30%;
   letter-spacing: .3em;
+  text-shadow: -1px 0 black, 0 1px black, 8px 0 black, 0 -1px black;
 }
 .topnav {
     overflow: hidden;
@@ -108,6 +109,7 @@ body {
     width: 70%;
     top: 0px;
     z-index: 3;
+    text-align: center;
   }
   
   .bottomnav a{
@@ -130,13 +132,20 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     margin: 15px auto;
     width: 90%;
   }
   .col {
     width: min-content;
   }
-
+  .explore-menu{
+    width: 5000px;
+    text-align: center;
+  }
+  .explore-menu:hover{
+    transform:scale(1.14);
+  }
   /* ///SaveButton */
 
 .gif-span {
@@ -181,4 +190,13 @@ body {
   border-radius: 5px;
   background-color: rgba(255, 0, 0, 0);
   transition: all .5s;
+}
+.footer {
+  color: red;
+  background-color: white;
+  font-family: "Ubuntu Condensed", sans-serif;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  margin-top: 100px;
 }
