@@ -108,6 +108,7 @@ body {
     width: 70%;
     top: 0px;
     z-index: 3;
+    text-align: center;
   }
   
   .bottomnav a{
@@ -136,7 +137,10 @@ body {
   .col {
     width: min-content;
   }
-
+  .explore-menu{
+    width: 5000px;
+    text-align: center;
+  }
   /* ///SaveButton */
 
 .gif-span {
