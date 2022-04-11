@@ -140,7 +140,7 @@ body {
     width: min-content;
   }
   .explore-menu{
-    width: 5000px;
+    width: auto;
     text-align: center;
   }
   .explore-menu:hover{
