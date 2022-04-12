@@ -41,36 +41,45 @@ async function renderGifs(type, key) {
             }
             break;
         case 'ids': 
-            response = await getGifsById(key);
+            if (key.length > 0) {
+                response = await getGifsById(key);
+            } else {
+                response = undefined;
+            }
             break;
+    }
+    if (document.getElementById("nogif-filler")) {
+        document.getElementById("nogif-filler").style.display = "none";
     }
     let html = "";
     let i = 0;
     for(let j = 0; j < 4; j++){document.getElementById(`gifCol${j}`).innerHTML = '';}
-    response.data.forEach(gif => {
-        if (i > 3) {i = 0;}
-        html = 
-        `
-            <span class="gif-span">
-            <img src=${gif.images.fixed_width.url} class="gif" alt="${gif.title}">
-            `;
-            if (savedGifs.indexOf(gif.id) != -1) {
-                html += `
-                        <span class="gif-overlay" style="height: ${gif.images.fixed_width.height}px; width: 200px;"></span>
-                        <i class="fa-solid fa-heart heart-filled save" id="${gif.id}" style="color: rgb(255,0,0);"></i>
-                        `;
-            } else {
-                html += `
-                        <span class="gif-overlay" style="height: ${gif.images.fixed_width.height}px; width: 200px;"></span>
-                        <i class="fa-solid fa-heart heart-filled save" id="${gif.id}"></i>
-                        `;
-            }
-            html += `</span>`
-        document.getElementById(`gifCol${i}`).innerHTML += html;
-        i ++;
-    });
-    console.log(savedGifs);
-    console.log(response);
+    if (response != undefined) {
+        response.data.forEach(gif => {
+            if (i > 3) {i = 0;}
+            html = 
+            `
+                <span class="gif-span">
+                <img src=${gif.images.fixed_width.url} class="gif" alt="${gif.title}">
+                `;
+                if (savedGifs.indexOf(gif.id) != -1) {
+                    html += `
+                            <span class="gif-overlay" style="height: ${gif.images.fixed_width.height}px; width: 200px;"></span>
+                            <i class="fa-solid fa-heart heart-filled save" id="${gif.id}" style="color: rgb(255,0,0);"></i>
+                            `;
+                } else {
+                    html += `
+                            <span class="gif-overlay" style="height: ${gif.images.fixed_width.height}px; width: 200px;"></span>
+                            <i class="fa-solid fa-heart heart-filled save" id="${gif.id}"></i>
+                            `;
+                }
+                html += `</span>`
+            document.getElementById(`gifCol${i}`).innerHTML += html;
+            i ++;
+        });
+    } else {
+        document.getElementById("nogif-filler").style.display = "block";
+    }
 }
 function renderGifsById() {
     renderGifs('ids', savedGifs);
@@ -124,7 +133,6 @@ document.body.addEventListener('click', e => {
         if (savedGifs.indexOf(e.target.id) === -1) {
             document.getElementById(e.target.id).style.color = "rgb(255, 0, 0)";
             savedGifs.push(e.target.id);
-            console.log(savedGifs);
         } else {
             document.getElementById(e.target.id).style.color = "rgb(238, 238, 238)";
             savedGifs.splice(savedGifs.indexOf(e.target.id), 1);
@@ -133,19 +141,8 @@ document.body.addEventListener('click', e => {
     }
     if (e.target.id === 'savedPage') {
         renderGifs('ids', savedGifs);
-        console.log('working')
     }
 });
-window.addEventListener('resize', () => {
-    console.log('window is being resized...')
-    if (window.matchMedia('(min-width: 1200px)').matches) {
-        colNums = 4;
-        console.log('window is greater than 1200 px')
-    } else if (window.matchMedia('(min-width: 900px)').matches) {
-        colNums = 3;
-        console.log('window is between 900px - 1200px');
-    }
-})
 
 var enter = document.getElementById("searchbar");
 enter.addEventListener("keyup", function(event) {
