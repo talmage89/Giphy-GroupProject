@@ -2,8 +2,9 @@ body {
   background-image:url('../pattern-34.jpeg');
   width: 100%;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .title{
   font-size: 50px;
