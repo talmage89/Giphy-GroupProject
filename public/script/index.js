@@ -1,12 +1,12 @@
 function getTrending() {
-    return fetch('https://api.giphy.com/v1/gifs/trending?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&limit=30&rating=pg').then(
+    return fetch('https://api.giphy.com/v1/gifs/trending?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&limit=40&rating=pg').then(
         function (response) {
             return response.json();
         }
     );
 }
 function getGifBySearch(key) {
-    return fetch(`https://api.giphy.com/v1/gifs/search?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&q=${key}&limit=20&offset=0&rating=pg&lang=en`).then(
+    return fetch(`https://api.giphy.com/v1/gifs/search?api_key=VpILSokp5S1iGMr2ZWL8yGPLXKmdkscB&q=${key}&limit=40&offset=0&rating=pg&lang=en`).then(
         function (response) {
             return response.json();
         }
@@ -28,14 +28,19 @@ function getGifsById(ids) {
     );
 }
 async function renderGifs(type, key) {
+    let load = document.getElementById("loader");
+    if (load) {load.style.display = 'block';}
+    
+    
     let response = await getTrending();
+    for(let j = 0; j < 4; j++){document.getElementById(`gifCol${j}`).innerHTML = '';}
     switch(type){
         case 'search':
             response = await getGifBySearch(key);
             break;
         case 'random': 
             response.data = [];
-            for (let i = 0; i < 30; i ++) {
+            for (let i = 0; i < 20; i ++) {
                 let gif = await getRandomGif();
                 response.data.push(gif.data);
             }
@@ -51,9 +56,11 @@ async function renderGifs(type, key) {
     if (document.getElementById("nogif-filler")) {
         document.getElementById("nogif-filler").style.display = "none";
     }
+    if (load) {
+        load.style.display = 'none';
+    }
     let html = "";
     let i = 0;
-    for(let j = 0; j < 4; j++){document.getElementById(`gifCol${j}`).innerHTML = '';}
     if (response != undefined) {
         response.data.forEach(gif => {
             if (i > 3) {i = 0;}
@@ -77,7 +84,7 @@ async function renderGifs(type, key) {
             document.getElementById(`gifCol${i}`).innerHTML += html;
             i ++;
         });
-    } else {
+    } else if (document.getElementById('nogif-filler')) {
         document.getElementById("nogif-filler").style.display = "block";
     }
 }
